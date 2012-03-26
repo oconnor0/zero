@@ -1,0 +1,68 @@
+module Sequence = struct
+  type v
+  type v seq
+
+  val hd? : v seq -> bool
+  val tl? : v seq -> bool
+
+  val hd : v seq -> v
+  val tl : v seq -> v seq
+end
+
+struct SequenceCtor : Sequence = {
+  nil : v seq
+  empty : v seq
+  cons : v -> v seq -> v seq
+  push : v -> v seq -> v seq
+  add : v -> v seq -> v seq
+}
+
+struct
+
+map :: (a -> b) -> a seq -> b seq
+val map f seq = match seq with
+  | hd x ->
+
+map f xs =
+  if hd? xs then f . hd xs
+  else if tl? xs then f
+
+select
+project
+reduce
+
+struct List =
+  type a list
+
+  type [a] list = [] | a :: a list
+
+  hd? : a list -> bool
+  tl? : a list -> bool
+
+  hd : a list -> a
+  tl : a list -> a list
+end struct
+
+iter f xs = {
+  if hd? xs { f . hd xs }
+  if tl? xs { iter f . tl xs}
+}
+
+iter f = match
+  | [] -> ()
+  | x :: xs -> f x; iter f xs
+
+fold f accum xs = match
+  | [] -> accum
+  | x :: xs -> fold (f accum x) xs
+
+fold f accum xs = {
+	if hd? xs { }
+}
+
+type fib : Int32 -> Int32
+val fib n =
+  if n <= 0 then 0
+  else if n = 1 then 1
+  else fib (n-1) + fib (n-2)
+  end

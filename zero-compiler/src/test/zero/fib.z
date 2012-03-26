@@ -1,0 +1,14 @@
+-- type fib : Int32 -> Int32
+val fib n =
+  if n <= 0 then 0
+  else if n = 1 then 1
+  else fib (n-1) + fib (n-2)
+  end
+
+val fib = fn n ->
+	match n with
+	| 0 -> 0
+	| 1 -> 1
+	| _ ->
+	else fib (n-1) + fib (n-2)
+	end
