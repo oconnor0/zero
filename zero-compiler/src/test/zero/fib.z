@@ -9,6 +9,5 @@ val fib = fn n ->
 	match n with
 	| 0 -> 0
 	| 1 -> 1
-	| _ ->
 	else fib (n-1) + fib (n-2)
 	end

@@ -16,6 +16,7 @@ public class Token {
     ELSE,
     END,
     MATCH,
+    WITH,
     TYPE,
     EQUALS,
     PLUS,
@@ -47,6 +48,7 @@ public class Token {
         case "end":   return END;
         case "type":  return TYPE;
         case "match": return MATCH;
+        case "with":  return WITH;
         case "=":     return EQUALS;
         case "+":     return PLUS;
         case "-":     return MINUS;
