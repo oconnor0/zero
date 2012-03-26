@@ -7,7 +7,7 @@
 Overview
 --------
 
-Zero v0.0.0.12 [5] is a language & compiler design exploration for the JVM. It is inspired by MixML [1], Eff [2], Manticore [3], and others.
+Zero v0.0.1.* [5] is a language & compiler design exploration for the JVM. It is inspired by MixML [1], Eff [2], Manticore [3], and others.
 
 Building & Running
 ------------------

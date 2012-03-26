@@ -96,8 +96,10 @@ public class Parser<T extends Token> {
     prefixParselets.put(INTEGER,  new IntegerPrefixParselet());
     prefixParselets.put(VAL,      new ValDeclPrefixParselet());
     prefixParselets.put(FN,       new FnPrefixParselet());
+    prefixParselets.put(LPAREN,   new GroupingPrefixParselet());
 
     mixfixParselets.put(PLUS,     new BinOpParselet(PLUS, Precedence.PLUS));
+    mixfixParselets.put(MINUS,    new BinOpParselet(MINUS, Precedence.PLUS));
     mixfixParselets.put(ASTERISK, new BinOpParselet(ASTERISK, Precedence.TIMES));
   }
 }

@@ -19,7 +19,10 @@ public class Token {
     TYPE,
     EQUALS,
     PLUS,
+    MINUS,
     ASTERISK,
+    SLASH,
+    BACKSLASH,
     COMMA,
     DOT,
     COLON,
@@ -46,7 +49,10 @@ public class Token {
         case "match": return MATCH;
         case "=":     return EQUALS;
         case "+":     return PLUS;
+        case "-":     return MINUS;
         case "*":     return ASTERISK;
+        case "/":     return SLASH;
+        case "\\":    return BACKSLASH;
         case ".":     return DOT;
         case ":":     return COLON;
         case ";":     return SEMICOLON;

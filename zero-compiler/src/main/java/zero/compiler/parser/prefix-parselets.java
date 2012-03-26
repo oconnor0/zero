@@ -24,6 +24,15 @@ class IntegerPrefixParselet implements PrefixParselet<Token> {
   }
 }
 
+class GroupingPrefixParselet implements PrefixParselet<Token> {
+  @Override
+  public Expression parse(final Parser<Token> parser, final Token token) {
+    final Expression grouped = parser.parseExpression();
+    parser.consume(RPAREN);
+    return grouped;
+  }
+}
+
 class ValDeclPrefixParselet implements PrefixParselet<Token> {
   @Override
   public Expression parse(final Parser<Token> parser, final Token token) {
