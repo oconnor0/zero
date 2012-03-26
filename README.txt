@@ -4,7 +4,21 @@
 ====================
 (C) 2012 Matt O'Connor <thegreendragon@gmail.com>
 
-Zero is a language & compiler design exploration for the JVM. It is inspired by MixML [1], Eff [2], Manticore [3], and others.
+Overview
+--------
+
+Zero v0.0.0.12 [5] is a language & compiler design exploration for the JVM. It is inspired by MixML [1], Eff [2], Manticore [3], and others.
+
+Building & Running
+------------------
+
+From the `zero-compiler` directory, run `mvn package exec:java` to start the REPL. Once everything is built, `mvn exec:java` is sufficient to start it. There is currently no support for interpreting or loading files.
+
+$ cd zero-compiler
+$ mvn package exec:java
+
+Details
+-------
 
 The parser is a Pratt parser [4]. The intention is for the grammar to be extensible at some level, but for ease of implementation a static grammar has been implemented.
 
@@ -12,3 +26,4 @@ The parser is a Pratt parser [4]. The intention is for the grammar to be extensi
 [2] http://math.andrej.com/eff/
 [3] http://manticore.cs.uchicago.edu/
 [4] http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/
+[5] Versioned via http://semver.org/
