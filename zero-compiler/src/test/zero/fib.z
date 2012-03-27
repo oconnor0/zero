@@ -11,3 +11,16 @@ val fib = fn n ->
 	| 1 -> 1
 	else fib (n-1) + fib (n-2)
 	end
+
+fib (let v = 10 in v*2) 10 - 45
+
+(fn n -> n*n) 10
+
+(
+	fn
+		n
+		->
+		n
+			*
+			n
+)

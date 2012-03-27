@@ -107,6 +107,7 @@ public class Parser<T extends Token> {
     prefixParselets.put(VAL,      new ValDeclParselet());
     prefixParselets.put(FN,       new FnParselet());
     prefixParselets.put(LPAREN,   new GroupingParselet());
+    prefixParselets.put(MATCH,    new MatchParselet());
 
     mixfixParselets.put(PLUS,     new BinOpParselet(PLUS, Precedence.PLUS));
     mixfixParselets.put(MINUS,    new BinOpParselet(MINUS, Precedence.PLUS));

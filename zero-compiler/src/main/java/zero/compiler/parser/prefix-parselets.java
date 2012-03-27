@@ -51,7 +51,7 @@ class ValDeclParselet implements PrefixParselet<Token> {
   }
 }
 
-class FnParselet implements  PrefixParselet<Token> {
+class FnParselet implements PrefixParselet<Token> {
   @Override
   public FnExpression parse(final Parser<Token> parser, final Token token) {
     final List<NameExpression> names = new LinkedList<>();
@@ -61,5 +61,28 @@ class FnParselet implements  PrefixParselet<Token> {
     parser.consume(RARROW);
     final Expression body = parser.parseExpression();
     return new FnExpression(body, names.toArray(new NameExpression[names.size()]));
+  }
+}
+
+class MatchParselet implements PrefixParselet<Token> {
+  @Override
+  public MatchExpression parse(final Parser<Token> parser, final Token token) {
+    final Expression val = parser.parseExpression();
+    parser.consume(WITH);
+    final List<CaseExpression> cases = new LinkedList<>();
+    while(parser.lookAhead(0).getType() == VBAR) {
+      parser.consume(VBAR);
+      final Expression pattern = parser.parseExpression();
+      parser.consume(RARROW);
+      final Expression result = parser.parseExpression();
+      cases.add(new CaseExpression(new PatternExpression(pattern), result));
+    }
+    if(parser.lookAhead(0).getType() == ELSE) {
+      parser.consume(ELSE);
+      final Expression result = parser.parseExpression();
+      cases.add(new CaseExpression(PatternExpression.WILDCARD, result));
+    }
+    parser.consume(END);
+    return new MatchExpression(val, cases.toArray(new CaseExpression[cases.size()]));
   }
 }

@@ -120,3 +120,70 @@ class ApplyExpression extends AExpression {
     return b;
   }
 }
+
+class MatchExpression extends AExpression {
+  private final Expression val;
+  private final CaseExpression[] cases;
+
+  public MatchExpression(final Expression val, final CaseExpression... cases) {
+    this.val = val;
+    this.cases = cases == null ? new CaseExpression[0] : cases;
+  }
+
+  @Override
+  public StringBuilder toString(final StringBuilder b) {
+    b.append("match ");
+    val.toString(b);
+    b.append(" with ");
+    for(final CaseExpression c : cases) {
+      c.toString(b);
+      b.append(' ');
+    }
+    b.append("end");
+    return b;
+  }
+}
+
+class CaseExpression extends AExpression {
+  private final PatternExpression bind;
+  private final Expression result;
+
+  public CaseExpression(final PatternExpression bind, final Expression result) {
+    this.bind = bind;
+    this.result = result;
+  }
+
+  @Override
+  public StringBuilder toString(final StringBuilder b) {
+    if(bind.isWildcard()) {
+      b.append("else ");
+    } else {
+      b.append("| ");
+      bind.toString(b);
+      b.append(" -> ");
+    }
+    result.toString(b);
+    return b;
+  }
+}
+
+class PatternExpression extends AExpression {
+  public static final PatternExpression WILDCARD = new PatternExpression(new NameExpression(new Token(Token.Type.NAME, "_")));
+
+  private final Expression pattern;
+
+  public PatternExpression(final Expression pattern) {
+    this.pattern = pattern;
+  }
+
+  @Override
+  public StringBuilder toString(final StringBuilder b) {
+    pattern.toString(b);
+    return b;
+  }
+
+  public boolean isWildcard() {
+    return pattern.getClass() == NameExpression.class
+      && ((NameExpression) pattern).name.equals("_");
+  }
+}
