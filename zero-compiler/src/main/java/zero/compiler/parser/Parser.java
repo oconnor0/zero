@@ -32,14 +32,14 @@ public class Parser<T extends Token> {
     if(prefix == null) {
       throw new ParseException(String.format("Cannot parse expression beginning with \"%s\"", token));
     }
-    System.out.println("parsing with " + prefix.getClass().getSimpleName());
+    // System.out.println("parsing with " + prefix.getClass().getSimpleName());
     Expression left = prefix.parse(this, token);
 
     while(precedence < getPrecedence()) {
       token = consume();
 
       final MixfixParselet mixfix = getMixfix(token.getType());
-      System.out.println("parsing with " + mixfix.getClass().getSimpleName());
+      // System.out.println("parsing with " + mixfix.getClass().getSimpleName());
       left = mixfix.parse(this, left, token);
     }
 

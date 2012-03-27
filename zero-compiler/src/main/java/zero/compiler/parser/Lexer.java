@@ -8,6 +8,8 @@ import zero.compiler.parser.Token.Type;
 import java.io.IOException;
 import java.io.PushbackReader;
 import java.io.StringReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Iterator;
 
 public class Lexer implements Iterator<Token> {
@@ -15,6 +17,10 @@ public class Lexer implements Iterator<Token> {
 
   public Lexer(final String s) {
     this.in = new PushbackReader(new StringReader(s));
+  }
+
+  public Lexer(final InputStream is) {
+    this.in = new PushbackReader(new InputStreamReader(is));
   }
 
   public boolean hasNext() {

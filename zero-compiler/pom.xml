@@ -45,6 +45,9 @@
         </executions>
         <configuration>
           <mainClass>zero.compiler.Main</mainClass>
+          <arguments>
+            <argument>src/test/zero/fib.z</argument>
+          </arguments>
         </configuration>
       </plugin>
     </plugins>
