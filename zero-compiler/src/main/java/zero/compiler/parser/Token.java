@@ -34,6 +34,8 @@ public class Token {
     RARROW,
     LARROW,
     BIARROW,
+    // non-tokens
+    DEFAULT,
     ERROR,
     EOF;
 
@@ -64,7 +66,7 @@ public class Token {
         case "->":    return RARROW;
         case "<-":    return LARROW;
         case "<->":   return BIARROW;
-        case "\0":    return EOF;
+        // case "\0":    return EOF;
       }
       throw new ParseException(String.format("Could not convert \"%s\" to a Token.Type", s));
     }

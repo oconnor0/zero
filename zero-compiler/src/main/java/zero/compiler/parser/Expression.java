@@ -98,3 +98,25 @@ class FnExpression extends AExpression {
     return b;
   }
 }
+
+class ApplyExpression extends AExpression {
+  private final Expression fn;
+  private final Expression[] params;
+
+  public ApplyExpression(final Expression fn, final Expression... params) {
+    this.fn = fn;
+    this.params = params == null ? new Expression[0] : params;
+  }
+
+  @Override
+  public StringBuilder toString(final StringBuilder b) {
+    b.append("((");
+    fn.toString(b).append(')');
+    for(final Expression param : params) {
+      b.append(' ');
+      param.toString(b);
+    }
+    b.append(')');
+    return b;
+  }
+}

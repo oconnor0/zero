@@ -10,21 +10,21 @@ import java.util.LinkedList;
 //   Expression parse(Parser parser, T token);
 // }
 
-class NamePrefixParselet implements PrefixParselet<Token> {
+class NameParselet implements PrefixParselet<Token> {
   @Override
-  public Expression parse(final Parser<Token> parser, final Token token) {
+  public NameExpression parse(final Parser<Token> parser, final Token token) {
     return new NameExpression(token);
   }
 }
 
-class IntegerPrefixParselet implements PrefixParselet<Token> {
+class IntegerParselet implements PrefixParselet<Token> {
   @Override
-  public Expression parse(final Parser<Token> parser, final Token token) {
+  public IntegerExpression parse(final Parser<Token> parser, final Token token) {
     return new IntegerExpression(token);
   }
 }
 
-class GroupingPrefixParselet implements PrefixParselet<Token> {
+class GroupingParselet implements PrefixParselet<Token> {
   @Override
   public Expression parse(final Parser<Token> parser, final Token token) {
     final Expression grouped = parser.parseExpression();
@@ -33,9 +33,9 @@ class GroupingPrefixParselet implements PrefixParselet<Token> {
   }
 }
 
-class ValDeclPrefixParselet implements PrefixParselet<Token> {
+class ValDeclParselet implements PrefixParselet<Token> {
   @Override
-  public Expression parse(final Parser<Token> parser, final Token token) {
+  public ValDeclExpression parse(final Parser<Token> parser, final Token token) {
     final Token name = parser.consume(NAME);
     parser.consume(EQUALS);
     final Expression val = parser.parseExpression();
@@ -51,9 +51,9 @@ class ValDeclPrefixParselet implements PrefixParselet<Token> {
   }
 }
 
-class FnPrefixParselet implements  PrefixParselet<Token> {
+class FnParselet implements  PrefixParselet<Token> {
   @Override
-  public Expression parse(final Parser<Token> parser, final Token token) {
+  public FnExpression parse(final Parser<Token> parser, final Token token) {
     final List<NameExpression> names = new LinkedList<>();
     while(parser.lookAhead(0).getType() == NAME) {
       names.add(new NameExpression(parser.consume()));

@@ -31,12 +31,14 @@ public class Lexer implements Iterator<Token> {
 
       c = peek();
 
-      if(isLowerCase(c)) {
-        return read(Check.NAME, Type.NAME);
-      } else if(isDigit(c)) {
-        return read(Type.INTEGER, Check.INTEGER);
-      } else if(Check.SYMBOL.is(c)) {
-        return read(Check.SYMBOL, Type.ERROR);
+      if(c > 0) {
+        if(isLowerCase(c)) {
+          return read(Check.NAME, Type.NAME);
+        } else if(isDigit(c)) {
+          return read(Type.INTEGER, Check.INTEGER);
+        } else if(Check.SYMBOL.is(c)) {
+          return read(Check.SYMBOL, Type.ERROR);
+        }
       }
 
       return Token.EOF;
@@ -75,7 +77,7 @@ public class Lexer implements Iterator<Token> {
   private int peek() throws IOException {
     final int c = in.read();
     in.unread(c);
-    return c;
+    return (c == (char) -1) ? -1 : c;
   }
 
   private int read() throws IOException {

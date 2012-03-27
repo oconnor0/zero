@@ -32,13 +32,14 @@ public class Parser<T extends Token> {
     if(prefix == null) {
       throw new ParseException(String.format("Cannot parse expression beginning with \"%s\"", token));
     }
-
+    System.out.println("parsing with " + prefix.getClass().getSimpleName());
     Expression left = prefix.parse(this, token);
 
     while(precedence < getPrecedence()) {
       token = consume();
 
-      final MixfixParselet mixfix = mixfixParselets.get(token.getType());
+      final MixfixParselet mixfix = getMixfix(token.getType());
+      System.out.println("parsing with " + mixfix.getClass().getSimpleName());
       left = mixfix.parse(this, left, token);
     }
 
@@ -50,7 +51,8 @@ public class Parser<T extends Token> {
   }
 
   public int getPrecedence(final int distance) {
-    final MixfixParselet<Token> mixfix = mixfixParselets.get(lookAhead(distance).getType());
+    // TODO: getMixfix() ?
+    final MixfixParselet<Token> mixfix = getMixfix(lookAhead(distance).getType()); //mixfixParselets.get(lookAhead(distance).getType());
     if(mixfix == null) {
       return 0;
     } else {
@@ -91,15 +93,28 @@ public class Parser<T extends Token> {
     }
   }
 
+  protected MixfixParselet<Token> getMixfix(final Token.Type type) {
+    MixfixParselet<Token> parselet = mixfixParselets.get(type);
+    if(parselet == null) {
+      parselet = mixfixParselets.get(DEFAULT);
+    }
+    return parselet;
+  }
+
   private void makeGrammar() {
-    prefixParselets.put(NAME,     new NamePrefixParselet());
-    prefixParselets.put(INTEGER,  new IntegerPrefixParselet());
-    prefixParselets.put(VAL,      new ValDeclPrefixParselet());
-    prefixParselets.put(FN,       new FnPrefixParselet());
-    prefixParselets.put(LPAREN,   new GroupingPrefixParselet());
+    prefixParselets.put(NAME,     new NameParselet());
+    prefixParselets.put(INTEGER,  new IntegerParselet());
+    prefixParselets.put(VAL,      new ValDeclParselet());
+    prefixParselets.put(FN,       new FnParselet());
+    prefixParselets.put(LPAREN,   new GroupingParselet());
 
     mixfixParselets.put(PLUS,     new BinOpParselet(PLUS, Precedence.PLUS));
     mixfixParselets.put(MINUS,    new BinOpParselet(MINUS, Precedence.PLUS));
     mixfixParselets.put(ASTERISK, new BinOpParselet(ASTERISK, Precedence.TIMES));
+    // mixfixParselets.put(DEFAULT,  new ApplyParselet());
+    mixfixParselets.put(INTEGER,  new ApplyParselet());
+    mixfixParselets.put(NAME,     new ApplyParselet());
+    mixfixParselets.put(LPAREN,   new ApplyParselet());
+    mixfixParselets.put(EOF,      new EofParselet());
   }
 }
