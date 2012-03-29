@@ -1,4 +1,4 @@
-/* (C) 2012 Matt O'Connor <thegreendragon@gmail.com> */
+/* Copyright (C) 2012 Matt O'Connor <thegreendragon@gmail.com> */
 package zero.compiler.parser;
 
 import static zero.compiler.parser.Token.Type.*;

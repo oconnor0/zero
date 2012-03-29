@@ -1,4 +1,4 @@
-/* (C) 2012 Matt O'Connor <thegreendragon@gmail.com> */
+/* Copyright (C) 2012 Matt O'Connor <thegreendragon@gmail.com> */
 package zero.util;
 
 import java.util.Iterator;
