@@ -4,6 +4,7 @@ Todo:
  * Implement expression visitor
  * Implement naive pretty printer
  * Implement ast-walking evaluator
+ * Replace uses of BinOpExpression with ApplyExpression
  * (?) looping constructs
  * Write lexing tests
  * Write parsing tests
