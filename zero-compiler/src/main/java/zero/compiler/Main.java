@@ -28,8 +28,13 @@ public final class Main {
     while((line = C.readLine()) != null) {
       handleSpecial(line);
 
-      final Expression expr = read(line);
-      eval(expr);
+      try {
+        final Expression expr = read(line);
+        eval(expr);
+      } catch(final ParseException exn) {
+        C.printf("Error: %s%n", exn.getMessage());
+      }
+
       C.printf(PROMPT);
     }
   }

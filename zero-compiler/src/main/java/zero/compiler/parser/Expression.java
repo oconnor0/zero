@@ -38,27 +38,6 @@ class IntegerExpression extends AExpression {
   }
 }
 
-class BinOpExpression extends AExpression {
-  private final Expression left, right;
-  private final Token op;
-
-  public BinOpExpression(final Expression left, final Token op, final Expression right) {
-    this.left  = left;
-    this.op    = op;
-    this.right = right;
-  }
-
-  @Override
-  public StringBuilder toString(final StringBuilder b) {
-    b.append('(');
-    left.toString(b);
-    b.append(op.getText());
-    right.toString(b);
-    b.append(')');
-    return b;
-  }
-}
-
 class ValDeclExpression extends AExpression {
   private final NameExpression name;
   private final Expression val;
@@ -111,7 +90,8 @@ class ApplyExpression extends AExpression {
   @Override
   public StringBuilder toString(final StringBuilder b) {
     b.append("((");
-    fn.toString(b).append(')');
+    fn.toString(b);
+    b.append(')');
     for(final Expression param : params) {
       b.append(' ');
       param.toString(b);

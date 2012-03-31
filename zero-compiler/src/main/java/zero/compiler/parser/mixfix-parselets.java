@@ -26,19 +26,19 @@ class EofParselet implements MixfixParselet<Token> {
   }
 }
 
-class BinOpParselet implements MixfixParselet<Token> {
+class InfixApplyParselet implements MixfixParselet<Token> {
   private final Token.Type op;
   private final int precedence;
 
-  public BinOpParselet(final Token.Type op, final int precedence) {
+  public InfixApplyParselet(final Token.Type op, final int precedence) {
     this.op = op;
     this.precedence = precedence;
   }
 
   @Override
-  public BinOpExpression parse(final Parser<Token> parser, final Expression left, final Token token) {
+  public ApplyExpression parse(final Parser<Token> parser, final Expression left, final Token token) {
     final Expression right = parser.parseExpression(getPrecedence());
-    return new BinOpExpression(left, token, right);
+    return new ApplyExpression(new NameExpression(token), left, right);
   }
 
   @Override

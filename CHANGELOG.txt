@@ -1,6 +1,17 @@
 Changelog
 =========
 
+v0.0.1.23,24,25,26,27: March 31, 2012
+-------------------------
+
+ * Remove `BinOpExpression`; replace all uses with `ApplyExpression`.
+ * Rename `BinOpParselet` to `InfixApplyParselet`.
+ * Support parsing `( * )` a b, i.e. using operators in infix contexts.
+ * Fix lexing of grouping ()[]{} to be tokenized as length-1 strings to support `(((5)))`.
+ * Allow val definition of operators via `val (+) = 5`.
+ * Simple printing appears to be "fixed-point" of parsed input.
+ * REPL doesn't die on ParseException
+
 v0.0.1.22: March 26, 2012
 -------------------------
 

@@ -27,7 +27,12 @@ class IntegerParselet implements PrefixParselet<Token> {
 class GroupingParselet implements PrefixParselet<Token> {
   @Override
   public Expression parse(final Parser<Token> parser, final Token token) {
-    final Expression grouped = parser.parseExpression();
+    final Expression grouped;
+    if(parser.lookAhead(0).getType().isNameSymbol()) {
+      grouped = new NameExpression(parser.consume());
+    } else {
+      grouped = parser.parseExpression();
+    }
     parser.consume(RPAREN);
     return grouped;
   }
@@ -36,10 +41,17 @@ class GroupingParselet implements PrefixParselet<Token> {
 class ValDeclParselet implements PrefixParselet<Token> {
   @Override
   public ValDeclExpression parse(final Parser<Token> parser, final Token token) {
-    final Token name = parser.consume(NAME);
+    final NameExpression name;
+    if(parser.lookAhead(0).getType() == LPAREN) {
+      parser.consume(LPAREN);
+      name = new NameExpression(parser.consume());
+      parser.consume(RPAREN);
+    } else {
+      name = new NameExpression(parser.consume(NAME));
+    }
     parser.consume(EQUALS);
     final Expression val = parser.parseExpression();
-    return new ValDeclExpression(new NameExpression(name), val);
+    return new ValDeclExpression(name, val);
     // if(parser.lookAhead(0, NAME, EQUALS)) {
     //   final Token name = parser.consume();
     //   final Token eq = parser.consume();

@@ -44,6 +44,9 @@ public class Lexer implements Iterator<Token> {
           return read(Type.INTEGER, Check.INTEGER);
         } else if(Check.SYMBOL.is(c)) {
           return read(Check.SYMBOL, Type.ERROR);
+        } else if(Check.GROUPING.is(c)) {
+          final String single = "" + (char)read();
+          return new Token(Type.fromString(single), single);
         }
       }
 
@@ -105,7 +108,12 @@ enum Check {
   },
   SYMBOL {
     public boolean is(final int c) {
-      return "~`!@#$%^&*()_-+=[]{}\\|;:\"'<>,.?/".contains(Character.toString((char)c));
+      return "~`!@#$%^&*_-+=\\|;:\"'<>,.?/".contains(Character.toString((char)c));
+    }
+  },
+  GROUPING {
+    public boolean is(final int c) {
+      return "()[]{}".contains(Character.toString((char)c));
     }
   },
   WHITESPACE {

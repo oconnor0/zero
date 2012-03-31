@@ -39,6 +39,28 @@ public class Token {
     ERROR,
     EOF;
 
+    public boolean isNameSymbol() {
+      switch(this) {
+        case EQUALS:
+        case PLUS:
+        case MINUS:
+        case ASTERISK:
+        case SLASH:
+        case BACKSLASH:
+        case COMMA:
+        case DOT:
+        case COLON:
+        case SEMICOLON:
+        case VBAR:
+        case RARROW:
+        case LARROW:
+        case BIARROW:
+          return true;
+        default:
+          return false;
+      }
+    }
+
     public static Type fromString(final String s) {
       switch(s) {
         case "let":   return LET;

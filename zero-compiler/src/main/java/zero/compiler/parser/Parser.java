@@ -109,9 +109,9 @@ public class Parser<T extends Token> {
     prefixParselets.put(LPAREN,   new GroupingParselet());
     prefixParselets.put(MATCH,    new MatchParselet());
 
-    mixfixParselets.put(PLUS,     new BinOpParselet(PLUS, Precedence.PLUS));
-    mixfixParselets.put(MINUS,    new BinOpParselet(MINUS, Precedence.PLUS));
-    mixfixParselets.put(ASTERISK, new BinOpParselet(ASTERISK, Precedence.TIMES));
+    mixfixParselets.put(PLUS,     new InfixApplyParselet(PLUS, Precedence.PLUS));
+    mixfixParselets.put(MINUS,    new InfixApplyParselet(MINUS, Precedence.PLUS));
+    mixfixParselets.put(ASTERISK, new InfixApplyParselet(ASTERISK, Precedence.TIMES));
     // mixfixParselets.put(DEFAULT,  new ApplyParselet());
     mixfixParselets.put(INTEGER,  new ApplyParselet());
     mixfixParselets.put(NAME,     new ApplyParselet());
