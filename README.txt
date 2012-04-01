@@ -12,10 +12,10 @@ Zero v0.0.1.* [5] is a language & compiler design exploration for the JVM. It is
 Building & Running
 ------------------
 
-From the `zero-compiler` directory, run `mvn package exec:java` to start the REPL. Once everything is built, `mvn exec:java` is sufficient to start it. There is currently no support for interpreting or loading files.
+From the `zero-compiler` directory, run `mvn compile exec:java` to start the REPL. Once everything is built, `mvn exec:java` is sufficient to start it. There is currently no support for interpreting or loading files.
 
 $ cd zero-compiler
-$ mvn package exec:java
+$ mvn compile exec:java
 
 Details
 -------
