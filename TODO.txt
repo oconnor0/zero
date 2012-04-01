@@ -17,6 +17,8 @@ Todo:
  * Write standard library
  * Learn about & implement effects system
  * Determine how to handle IO (asynchronously?)
+ * Allow line comments
+ * Allow block (nested?) comments
 
 Doing:
 ======
