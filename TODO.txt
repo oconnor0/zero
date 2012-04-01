@@ -16,8 +16,12 @@ Todo:
  * Learn about & implement effects system
  * Determine how to handle IO (asynchronously?)
 
+Doing:
+======
+
+
 Done:
 =====
 
- * Replace uses of BinOpExpression with ApplyExpression
- * Implement expression visitor
+ * Replace uses of BinOpExpression with ApplyExpression. Remove BinOpExpression.
+ * Implement expression visitor.
