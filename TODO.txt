@@ -3,14 +3,16 @@ Todo:
 
  * Implement naive pretty printer
  * Determine how to handle symbol definitions
- * Implement ast-walking evaluator
+ * Implement ast-walking evaluator/interpreter
  * (?) looping constructs
  * Write lexing tests
  * Write parsing tests
  * Write evaluation tests
- * Allow files to be passed in from the command line & evaluated
+ * Allow files to be passed in from the command line
+ * Evaluate files from the command line
  * Add module system
  * Add typeclasses
+ * Unify modules & typeclasses
  * Add implicit parallelism
  * Write standard library
  * Learn about & implement effects system
