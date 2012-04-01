@@ -1,10 +1,9 @@
 Todo:
 =====
 
- * Implement expression visitor
  * Implement naive pretty printer
+ * Determine how to handle symbol definitions
  * Implement ast-walking evaluator
- * Replace uses of BinOpExpression with ApplyExpression
  * (?) looping constructs
  * Write lexing tests
  * Write parsing tests
@@ -16,3 +15,9 @@ Todo:
  * Write standard library
  * Learn about & implement effects system
  * Determine how to handle IO (asynchronously?)
+
+Done:
+=====
+
+ * Replace uses of BinOpExpression with ApplyExpression
+ * Implement expression visitor

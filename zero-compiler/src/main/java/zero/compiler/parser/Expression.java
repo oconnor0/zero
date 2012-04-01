@@ -2,7 +2,8 @@
 package zero.compiler.parser;
 
 public interface Expression {
-  public StringBuilder toString(StringBuilder b);
+  <R, C> R accept(ExpressionVisitor<R, C> v, C c);
+  StringBuilder toString(StringBuilder b);
 }
 
 abstract class AExpression implements Expression {
@@ -20,6 +21,11 @@ class NameExpression extends AExpression {
   }
 
   @Override
+  public <R, C> R accept(ExpressionVisitor<R, C> v, C c) {
+    return v.visit(this, c);
+  }
+
+  @Override
   public StringBuilder toString(final StringBuilder b) {
     return b.append(name);
   }
@@ -30,6 +36,11 @@ class IntegerExpression extends AExpression {
 
   public IntegerExpression(final Token token) {
     this.val = Integer.parseInt(token.getText());
+  }
+
+  @Override
+  public <R, C> R accept(ExpressionVisitor<R, C> v, C c) {
+    return v.visit(this, c);
   }
 
   @Override
@@ -45,6 +56,11 @@ class ValDeclExpression extends AExpression {
   public ValDeclExpression(final NameExpression name, final Expression val) {
     this.name = name;
     this.val = val;
+  }
+
+  @Override
+  public <R, C> R accept(ExpressionVisitor<R, C> v, C c) {
+    return v.visit(this, c);
   }
 
   @Override
@@ -67,6 +83,11 @@ class FnExpression extends AExpression {
   }
 
   @Override
+  public <R, C> R accept(ExpressionVisitor<R, C> v, C c) {
+    return v.visit(this, c);
+  }
+
+  @Override
   public StringBuilder toString(final StringBuilder b) {
     b.append("fn ");
     for(final NameExpression name : params) {
@@ -85,6 +106,11 @@ class ApplyExpression extends AExpression {
   public ApplyExpression(final Expression fn, final Expression... params) {
     this.fn = fn;
     this.params = params == null ? new Expression[0] : params;
+  }
+
+  @Override
+  public <R, C> R accept(ExpressionVisitor<R, C> v, C c) {
+    return v.visit(this, c);
   }
 
   @Override
@@ -111,6 +137,11 @@ class MatchExpression extends AExpression {
   }
 
   @Override
+  public <R, C> R accept(ExpressionVisitor<R, C> v, C c) {
+    return v.visit(this, c);
+  }
+
+  @Override
   public StringBuilder toString(final StringBuilder b) {
     b.append("match ");
     val.toString(b);
@@ -134,6 +165,11 @@ class CaseExpression extends AExpression {
   }
 
   @Override
+  public <R, C> R accept(ExpressionVisitor<R, C> v, C c) {
+    return v.visit(this, c);
+  }
+
+  @Override
   public StringBuilder toString(final StringBuilder b) {
     if(bind.isWildcard()) {
       b.append("else ");
@@ -154,6 +190,11 @@ class PatternExpression extends AExpression {
 
   public PatternExpression(final Expression pattern) {
     this.pattern = pattern;
+  }
+
+  @Override
+  public <R, C> R accept(ExpressionVisitor<R, C> v, C c) {
+    return v.visit(this, c);
   }
 
   @Override

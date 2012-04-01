@@ -1,7 +1,7 @@
 Changelog
 =========
 
-v0.0.1.23,24,25,26,27: March 31, 2012
+v0.0.1.23,24,25,26,27,28: March 31, 2012
 -------------------------
 
  * Remove `BinOpExpression`; replace all uses with `ApplyExpression`.
@@ -11,6 +11,7 @@ v0.0.1.23,24,25,26,27: March 31, 2012
  * Allow val definition of operators via `val (+) = 5`.
  * Simple printing appears to be "fixed-point" of parsed input.
  * REPL doesn't die on ParseException
+ * Implement `ExpressionVisitor` "infrastructure"
 
 v0.0.1.22: March 26, 2012
 -------------------------
