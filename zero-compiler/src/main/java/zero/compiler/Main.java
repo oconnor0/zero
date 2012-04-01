@@ -66,7 +66,7 @@ public final class Main {
   private static String welcome() {
     final StringBuilder b = new StringBuilder();
     b.append("zero repl v").append(Version.string()).append(NL);
-    b.append(" (C) 2012 Matt O'Connor <thegreendragon@gmail.com>").append(NL);
+    b.append("  Copyright (C) 2012 Matt O'Connor <thegreendragon@gmail.com>").append(NL);
     return b.toString();
   }
 }
