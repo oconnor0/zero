@@ -7,12 +7,14 @@ import zero.compiler.parser.*;
 import java.util.Map;
 
 public class Interpreter {
-  public Result eval(final Expression e, final Scope in) {
-    return null;
+  public static Result eval(final Expression e, final Scope in) {
+    return e.accept(AstWalk.INSTANCE, in);
   }
 }
 
-class AstWalk implements ExpressionVisitor<Result, Scope>  {
+enum AstWalk implements ExpressionVisitor<Result, Scope>  {
+  INSTANCE;
+
   @Override
   public Result visit(NameExpression expr, Scope scope) {
     return new Result(scope.get(expr.name), scope);
@@ -25,8 +27,9 @@ class AstWalk implements ExpressionVisitor<Result, Scope>  {
 
   @Override
   public Result visit(ValDeclExpression expr, Scope scope) {
-    scope = scope.add(expr.name, new Val(expr.val));
-    return new Result(scope);
+    final Val fn = new Val(expr.val);
+    scope = scope.add(expr.name.name, fn);
+    return new Result(fn, scope);
   }
 
   @Override
@@ -36,25 +39,21 @@ class AstWalk implements ExpressionVisitor<Result, Scope>  {
 
   @Override
   public Result visit(ApplyExpression expr, Scope scope) {
-
     throw new UnsupportedOperationException();
   }
 
   @Override
   public Result visit(MatchExpression expr, Scope scope) {
-
     throw new UnsupportedOperationException();
   }
 
   @Override
   public Result visit(CaseExpression expr, Scope scope) {
-
     throw new UnsupportedOperationException();
   }
 
   @Override
   public Result visit(PatternExpression expr, Scope scope) {
-
     throw new UnsupportedOperationException();
   }
 }

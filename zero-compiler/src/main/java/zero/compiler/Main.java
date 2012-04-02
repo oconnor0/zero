@@ -22,7 +22,7 @@ public final class Main {
     if(args.length > 0) {
       for(final String file : args) {
         final Expression expr = read(new FileInputStream(file));
-        eval(expr);
+        scope = eval(expr, scope);
       }
     }
 
@@ -33,7 +33,7 @@ public final class Main {
 
       try {
         final Expression expr = read(line);
-        eval(expr);
+        scope = eval(expr, scope);
       } catch(final ParseException exn) {
         C.printf("Error: %s%n", exn.getMessage());
       }
@@ -56,8 +56,10 @@ public final class Main {
     return expr;
   }
 
-  private static void eval(final Expression expr) {
-    C.printf("%s%n", expr);
+  private static Scope eval(final Expression expr, final Scope scope) {
+    final Result result = Interpreter.eval(expr, scope);
+    C.printf("= %s%n", result.val.val);
+    return result.newScope;
   }
 
   private static void handleSpecial(final String line) {

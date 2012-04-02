@@ -4,7 +4,9 @@ package zero.lang;
 import zero.compiler.parser.Expression;
 
 public class Val {
-  final Object val;
+  public static final Val UNIT = new Val("()");
+
+  public final Object val;
 
   public Val(final Object val) {
     this.val = val;
