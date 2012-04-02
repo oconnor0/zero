@@ -5,8 +5,9 @@ import java.io.Console;
 import java.io.InputStream;
 import java.io.FileInputStream;
 
-import zero.lang.Version;
+import zero.lang.*;
 import zero.compiler.parser.*;
+import zero.interp.ast.*;
 
 public final class Main {
   static final Console C = System.console();
@@ -15,6 +16,8 @@ public final class Main {
 
   public static void main(final String[] args) throws Exception {
     C.printf(welcome());
+
+    Scope scope = Pervasives.addAll(Scope.EMPTY);
 
     if(args.length > 0) {
       for(final String file : args) {

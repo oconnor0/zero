@@ -19,6 +19,11 @@
       <artifactId>guava</artifactId>
       <version>11.0.2</version>
     </dependency>
+    <dependency>
+      <groupId>org.functionaljava</groupId>
+      <artifactId>functionaljava</artifactId>
+      <version>3.0</version>
+    </dependency>
   </dependencies>
 
   <build>
