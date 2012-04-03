@@ -1,6 +1,7 @@
 Todo:
 =====
 
+ * Add closure support
  * Actual pattern matching
  * Pattern matching tests
  * User-defined data types
