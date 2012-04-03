@@ -2,14 +2,11 @@ Todo:
 =====
 
  * Implement naive pretty printer
- * Determine how to handle symbol definitions
- * Implement ast-walking evaluator/interpreter
+ * Determine how to handle symbol (val (+) = ...) definitions
  * (?) looping constructs
  * Write lexing tests
  * Write parsing tests
  * Write evaluation tests
- * Allow files to be passed in from the command line
- * Evaluate files from the command line
  * Add module system
  * Add typeclasses
  * Unify modules & typeclasses
@@ -23,9 +20,12 @@ Todo:
 Doing:
 ======
 
+ * Implement ast-walking evaluator/interpreter
 
 Done:
 =====
 
  * Replace uses of BinOpExpression with ApplyExpression. Remove BinOpExpression.
  * Implement expression visitor.
+ * Allow files to be passed in from the command line
+ * Evaluate files from the command line
