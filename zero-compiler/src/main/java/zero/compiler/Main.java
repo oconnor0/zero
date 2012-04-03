@@ -34,7 +34,7 @@ public final class Main {
       try {
         final Expression expr = read(line);
         scope = eval(expr, scope);
-      } catch(final ParseException exn) {
+      } catch(final ParseException | NotBoundException | MatchFailedException exn) {
         C.printf("Error: %s%n", exn.getMessage());
       }
 

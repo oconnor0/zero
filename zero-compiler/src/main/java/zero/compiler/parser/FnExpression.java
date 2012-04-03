@@ -10,6 +10,10 @@ public class FnExpression extends AExpression {
     this.body = body;
   }
 
+  public int arity() {
+    return params == null ? 0 : params.length;
+  }
+
   @Override
   public <R, C> R accept(ExpressionVisitor<R, C> v, C c) {
     return v.visit(this, c);

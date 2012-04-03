@@ -52,6 +52,7 @@
           <mainClass>zero.compiler.Main</mainClass>
           <arguments>
             <argument>src/test/zero/fib.z</argument>
+            <argument>src/test/zero/double.z</argument>
           </arguments>
         </configuration>
       </plugin>

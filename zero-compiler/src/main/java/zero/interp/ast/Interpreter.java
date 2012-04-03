@@ -17,43 +17,72 @@ enum AstWalk implements ExpressionVisitor<Result, Scope>  {
 
   @Override
   public Result visit(NameExpression expr, Scope scope) {
-    return new Result(scope.get(expr.name), scope);
+    return new Result(scope.get(expr.name)/*.visit(this, scope).val*/, scope);
   }
 
   @Override
   public Result visit(IntegerExpression expr, Scope scope) {
-    return new Result(new Val(expr.val), scope);
+    return new Result(Val.wrap(expr.val), scope);
   }
 
   @Override
   public Result visit(ValDeclExpression expr, Scope scope) {
-    final Val fn = new Val(expr.val);
-    scope = scope.add(expr.name.name, fn);
-    return new Result(fn, scope);
+    final Val val = expr.val.accept(this, scope).val;
+    scope = scope.add(expr.name.name, val);
+    return new Result(val, scope);
   }
 
   @Override
   public Result visit(FnExpression expr, Scope scope) {
-    throw new UnsupportedOperationException();
+    if(scope.params == null) {
+      // no parameters passed in, just return ourselves
+      return new Result(new Val(expr), scope);
+    } else {
+      // have parameters, evaluate fn
+      for(int i = 0, n = expr.params.length; i < n; i++) {
+        final String paramName = expr.params[i].name;
+        final Val paramVal = scope.params[i];
+        scope = scope.add(paramName, paramVal);
+      }
+      // clear out parameters so they don't propagate down & muck stuff up
+      scope = scope.noParams();
+      return expr.body.accept(this, scope);
+    }
   }
 
   @Override
   public Result visit(ApplyExpression expr, Scope scope) {
-    throw new UnsupportedOperationException();
+    final Val valOfFn = expr.fn.accept(this, scope).val;
+
+    final Val[] params = new Val[expr.params.length];
+    int i = 0;
+    for(final Expression param : expr.params) {
+      params[i++] = param.accept(this, scope).val;
+    }
+
+    if(valOfFn.isFn2()) {
+      final Fn2 fn = valOfFn.asFn2();
+      return new Result(Val.wrap(fn.apply(params[0], params[1])), scope);
+    } else {
+      final FnExpression fn = (FnExpression) valOfFn.asExpression();
+      return fn.accept(this, scope.params(params));
+    }
   }
 
   @Override
   public Result visit(MatchExpression expr, Scope scope) {
-    throw new UnsupportedOperationException();
+    final Val matching = expr.val.accept(this, scope).val;
+    scope = scope.params(matching);
+    throw new UnsupportedOperationException("match");
   }
 
   @Override
   public Result visit(CaseExpression expr, Scope scope) {
-    throw new UnsupportedOperationException();
+    throw new UnsupportedOperationException("case");
   }
 
   @Override
   public Result visit(PatternExpression expr, Scope scope) {
-    throw new UnsupportedOperationException();
+    throw new UnsupportedOperationException("pattern");
   }
 }

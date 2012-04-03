@@ -4,22 +4,22 @@ package zero.lang;
 import zero.interp.ast.Scope;
 
 public final class Pervasives {
-  public static final Val plus = new Val(new Fn2<Integer, Integer, Integer>() {
+  public static final Val plus = new Val(new Fn2<Val, Val, Val>() {
     @Override
-    public Integer apply(final Integer a, final Integer b) {
-      return a + b;
+    public Val apply(final Val a, final Val b) {
+      return new Val(a.asInteger() + b.asInteger());
     }
   });
-  public static final Val minus = new Val(new Fn2<Integer, Integer, Integer>() {
+  public static final Val minus = new Val(new Fn2<Val, Val, Val>() {
     @Override
-    public Integer apply(final Integer a, final Integer b) {
-      return a - b;
+    public Val apply(final Val a, final Val b) {
+      return new Val(a.asInteger() - b.asInteger());
     }
   });
-  public static final Val times = new Val(new Fn2<Integer, Integer, Integer>() {
+  public static final Val times = new Val(new Fn2<Val, Val, Val>() {
     @Override
-    public Integer apply(final Integer a, final Integer b) {
-      return a * b;
+    public Val apply(final Val a, final Val b) {
+      return new Val(a.asInteger() * b.asInteger());
     }
   });
 
