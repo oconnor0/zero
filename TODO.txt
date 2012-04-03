@@ -1,6 +1,11 @@
 Todo:
 =====
 
+ * Actual pattern matching
+ * Pattern matching tests
+ * User-defined data types
+ * Sum types
+ * Product types
  * Implement naive pretty printer
  * Determine how to handle symbol (val (+) = ...) definitions
  * (?) looping constructs

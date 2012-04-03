@@ -73,16 +73,38 @@ enum AstWalk implements ExpressionVisitor<Result, Scope>  {
   public Result visit(MatchExpression expr, Scope scope) {
     final Val matching = expr.val.accept(this, scope).val;
     scope = scope.params(matching);
-    throw new UnsupportedOperationException("match");
+    for(final CaseExpression kase : expr.cases) {
+      final Result result = kase.accept(this, scope);
+      if(result == null) {
+        continue;
+      } else {
+        return result;
+      }
+    }
+    throw new MatchFailedException(matching.val);
   }
 
   @Override
   public Result visit(CaseExpression expr, Scope scope) {
-    throw new UnsupportedOperationException("case");
+    final Result result = expr.bind.accept(this, scope);
+    if(result == null) {
+      return null;
+    } else {
+      return expr.result.accept(this, result.newScope);
+    }
   }
 
   @Override
   public Result visit(PatternExpression expr, Scope scope) {
-    throw new UnsupportedOperationException("pattern");
+    if(expr.isWildcard()) {
+      return new Result(scope);
+    }
+    // assume we have an integer
+    final Val val = expr.pattern.accept(this, scope).val;
+    if(val.val.equals(scope.params[0].val)) {
+      return new Result(scope);
+    }
+    // pattern match failed
+    return null;
   }
 }
