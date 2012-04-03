@@ -1,11 +1,13 @@
 Changelog
 =========
 
-v0.0.1.34: April 2, 2012
+v0.0.1.34,35: April 2, 2012
 ------------------------
 
 * `val pi = 3` `val double = fn n -> n*n` `double pi` now works (names)
 * Get function application working
+* Get "primitive" pattern matching working
+* Fibonacci now correctly calculates!
 
 v0.0.1.23,24,25,26,27,28: March 31, 2012
 ----------------------------------------
