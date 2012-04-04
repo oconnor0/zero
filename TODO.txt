@@ -22,6 +22,8 @@ Todo:
  * Determine how to handle IO (asynchronously?)
  * Allow line comments
  * Allow block (nested?) comments
+ * Fix scoping, closure, etc. to get `val a = fn b -> fn c -> b * c` to work.
+ * Support mutually recursive definitions (say `even` and `odd`)
 
 Doing:
 ======
